@@ -37,9 +37,14 @@ jobs:
 
       # Actual work
       - name: Generate build info
-        run: python3.9 build.py
+        run: python3.9 build.py eigen
         working-directory: ./third_party
       - name: Run cmake
         run: cmake -DCMAKE_CXX_FLAGS="-fopenmp -std=gnu++0x -Wa,-mbig-obj -O3 -D_POSIX_C_SOURCE=200809L" ..
       - name: Run make
         run: make
+
+      - name: Collect artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: build/*
