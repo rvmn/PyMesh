@@ -41,10 +41,10 @@ jobs:
         working-directory: ./third_party
       - name: Run cmake
         run: cmake -DCMAKE_CXX_FLAGS="-fopenmp -std=gnu++0x -Wa,-mbig-obj -O3 -D_POSIX_C_SOURCE=200809L" ..
-        working-directory: ./build
+        working-directory: build
       - name: Run make
         run: make
-        working-directory: ./build
+        working-directory: build
 
       - name: Collect artifacts
         uses: actions/upload-artifact@v2
