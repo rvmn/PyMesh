@@ -33,7 +33,7 @@ jobs:
         with:
           path: |
             C:/cygwin-packages
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}
 
       # Actual work
       - name: Generate build info
