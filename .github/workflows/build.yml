@@ -1,0 +1,45 @@
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Ensure line endings are sane
+        run: git config --global core.autocrlf input
+      # Dependencies
+      - name: Checkout project and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      # - name: Setup Python 3.10
+      #   uses: actions/setup-python@v3
+      #   with:
+      #     python-version: '3.10'
+      #     architecture: 'x64'
+      # - name: Install cmake
+      #   uses: lukka/get-cmake@latest
+      - name: Install Cygwin and dependencies
+        uses: cygwin/cygwin-install-action@master
+        packages: >-
+          libtool
+          make
+          m4
+          gcc-core
+          gcc-g++
+          libgcc
+          cmake
+          mpft
+          libmpfr-devel
+          libOpenCL1
+          libboost-devel
+          python3-devel
+
+      # Actual work
+      - name: Generate build info
+        run: python build.py all
+        working-directory: ./third_party
+      - name: Run cmake
+        run: cmake -DCMAKE_CXX_FLAGS="-fopenmp -std=gnu++0x -Wa,-mbig-obj -O3 -D_POSIX_C_SOURCE=200809L" ..
+      - name: Run make
+        run: make
