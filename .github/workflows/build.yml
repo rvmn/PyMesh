@@ -12,6 +12,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
+
+      - name: Cache Cygwin dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            C:/cygwin-packages
+          key: ${{ runner.os }}
       - name: Install Cygwin and dependencies
         uses: cygwin/cygwin-install-action@master
         with:
@@ -28,25 +35,18 @@ jobs:
             libboost-devel
             python3-devel
 
-      - name: Cache Cygwin dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            C:/cygwin-packages
-          key: ${{ runner.os }}
-
       # Actual work
       - name: Generate build info
         run: python3.9 build.py eigen
         working-directory: ./third_party
-      - name: Run cmake
-        run: cmake -DCMAKE_CXX_FLAGS="-fopenmp -std=gnu++0x -Wa,-mbig-obj -O3 -D_POSIX_C_SOURCE=200809L" ..
-        working-directory: ./build
-      - name: Run make
-        run: make
-        working-directory: ./build
+      # - name: Run cmake
+      #   run: cmake -DCMAKE_CXX_FLAGS="-fopenmp -std=gnu++0x -Wa,-mbig-obj -O3 -D_POSIX_C_SOURCE=200809L" ..
+      #   working-directory: ./build
+      # - name: Run make
+      #   run: make
+      #   working-directory: ./build
 
-      - name: Collect artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          path: build/*
+      # - name: Collect artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     path: build/*
