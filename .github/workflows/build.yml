@@ -16,9 +16,8 @@ jobs:
       - name: Cache Cygwin dependencies
         uses: actions/cache@v3
         with:
-          path: |
-            C:/cygwin-packages
-          key: ${{ runner.os }}
+          path: C:/cygwin-packages
+          key: cache
       - name: Install Cygwin and dependencies
         uses: cygwin/cygwin-install-action@master
         with:
@@ -37,7 +36,7 @@ jobs:
 
       # Actual work
       - name: Generate build info
-        run: python3.9 build.py eigen
+        run: python3.9 build.py all
         working-directory: ./third_party
       - run: mkdir build
       - name: Run cmake
