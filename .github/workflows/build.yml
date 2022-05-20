@@ -21,19 +21,20 @@ jobs:
       #   uses: lukka/get-cmake@latest
       - name: Install Cygwin and dependencies
         uses: cygwin/cygwin-install-action@master
-        packages: >-
-          libtool
-          make
-          m4
-          gcc-core
-          gcc-g++
-          libgcc
-          cmake
-          mpft
-          libmpfr-devel
-          libOpenCL1
-          libboost-devel
-          python3-devel
+        with:
+          packages: >-
+            libtool
+            make
+            m4
+            gcc-core
+            gcc-g++
+            libgcc
+            cmake
+            mpft
+            libmpfr-devel
+            libOpenCL1
+            libboost-devel
+            python3-devel
 
       # Actual work
       - name: Generate build info
