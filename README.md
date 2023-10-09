@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/PyMesh/PyMesh.svg?branch=main)](https://travis-ci.org/PyMesh/PyMesh)
 [![Documentation Status](https://readthedocs.org/projects/pymesh/badge/?version=latest)](https://pymesh.readthedocs.io/en/latest/?badge=latest)
 
-
 ### About PyMesh ###
 
 **PyMesh** is a code base developed by Qingnan Zhou for his PhD research at New
